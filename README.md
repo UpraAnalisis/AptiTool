@@ -1,115 +1,61 @@
-# Aptitool AddIn
+# Herramientas Optimizadas
 
-Es una herramienta del tipo Add-In que se incorpora a ArcGIS para generar reporte del comportamiento de las variables según el componente que se seleccione. Esta herramienta es un complemento al proceso de zonificación que se desarrolla en la [UPRA](http://www.upra.gov.co/) y como tal hace falta que la estructura de almacenamiento se corresponda con la que se genera en este proceso, para mayor información dirigirse al repositorio de [zonificación](https://upraanalisis.github.io/zonificacion/).
-
-
-## Instalación
-
-El proceso de instalación es el siguiente:
-
-1. Descargar el `Add-In`:
-
-    Existen dos opciones de descarga, se puede descargar todo el repositorio o solo el ultimo Release del Add-In [Aquí](https://github.com/UpraAnalisis/AptiTool/releases/latest)
-
-2. Luego hay dos opciones:
-
-3. Si descargo el código, descomprimir y ejecutar el script `makeaddin.py`
-
-4. Si descargo el release, descomprimir.
-
-5. finalmente común a ambos copiar el archivo con extensión `.esriaddin` en el directorio:
-
-    ```directorio Arcgis
-    %USERPROFILE%\Documents\ArcGIS\AddIns\
-    ```
-
-Ingresar a la versión de ArcGis en la que se quiera instalar el Add-In y pegar el archivo.
-
-## Uso de la herramienta
-
-Para usar el Add-In Apptitool es necesario tener presente la estructura de Zonificación que se usa para las cadenas productivas, así como se ve en el siguiente gráfico:
-
-<p align="center">
- <img src="Images\EstructuraNecesaria.png">
-</p>
-
-En la estructura se contempla que existe una GDB llamada **1_VARIABLES.gdb**, de esta el Add-In consultara la información contenida en el campo **Des***_ en el cual está contenido el metadato de la variable que se corresponde a El nombre de la Variable, la calificación y el valor que genero esta calificación.
-
-### Modo de empleo
-
-1. Cargar capas del criterio que se quieren consultar.
-
-### Selección criterio
-
-1. a.	Situé el criterio que se desea consultar en la tabla de contenido (TOC) de ArcMAP.
-
-<p align="center">
- <img src="Images\SeleccionCriterio.png">
-</p>
-
-2. Asegurando que el criterio esta seleccionado en el TOC, proceder a hacer clic en el botón de la herramienta AptiTool
-
-<p align="center">
- <img src="Images\SeleccionHerramienta.png">
-</p>
-
-3. Hacer clic en el punto de interés que se desea consultar
-
-<p align="center">
- <img src="Images\clickPunto.png">
-</p>
+Las herramientas optimizadas de geoprocesamiento desarrollados por la UPRA incorporan una interfaz gráfica que facilita al usuario la interacción con la información Geográfica mediante el uso de los programas ArcMap y ArcCatalog, permitiendo su fácil incorporación en modelos de geoprocesamiento creados con Model Builder. La característica principal de los scripts desarrollados por la UPRA consiste en hacer uso de **Cursores, Procesamiento en Paralelo y Procesamiento en Segundo Plano a 64 Bits**.
+Su objetivo principal es agilizar los procesos de análisis realizados por la entidad.
 
 
-### Selección Variables
+## Limitantes y Recomendaciones
 
-Una vez realizado el proceso anterior el Add-In consulta en la gdb con las variables que corresponden a el criterio de interés, luego de eso carga los nombre en el menú desplegable y están listas para ser adicionadas a la visualización del mapa.
++ Estas herramientas están diseñadas para funcionar con **ArcGis Desktop 10.5**  y/o versiones superiores.
 
-1. Seleccione variable a cargar en el en el menú desplegable
++ Estas herramientas están desarrolladas para funcionar con el sistema de coordenadas Magna Colombia Bogota [EPSG: 3116]([http://spatialreference.org/ref/epsg/magna-sirgas-colombia-bogota-zone/), por ello, si se desea emplear un nuevo sistema de coordenadas se recomienda cambiar en los scripts las líneas que contengan el siguiente código:
 
-<p align="center">
- <img src="Images\SeleccionVariable.png">
-</p>
+``` py
+    arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(3116)
+```
+Por el Sistema de coordenadas con el que se desee trabajar.
++ La mayoría de estas herramientas hacen uso del complemento [ArcGIS for Desktop Background Geoprocessing (64 bits)](http://desktop.arcgis.com/es/arcmap/10.3/analyze/executing-tools/64bit-background.htm) versión 10.5. Por ello para su correcta ejecución se hace necesario la  instalación de dicho complemento.
 
-2. Aparece un mensaje que advierte que la variable se está cargando, pulse OK
++ Estas herramientas no trabajan con las selecciones activas; aunque reciben como parámetros feature layers, estas trabajan directamente con los feature class asociados a estos.
 
-<p align="center">
- <img src="Images\CargarVariable.png">
-</p>
+## Instrucciones de Uso
 
-3. La herramienta sitúa una vista más cercana al punto designado y carga la variable seleccionada al TOC.
+Para hacer uso de las herramientas optimizadas lo primero que se debe hacer es descargar el repositorio y almacenar la carpeta **SCRIPTS_ANALISIS** en el disco C del pc. Para hacerlo, se debe hacer clic en la siguiente en el ícono de Download, tal y como se muestra en la siguiente imagen.
 
-<p align="center">
- <img src="Images\AcercarVista.png">
-</p>
+![descarga](/Images/descarga.png)
 
-### Generación Reporte
+Luego, una vez descargado, se debe descomprimir y se debe copiar la carpeta SCRIPTS_ANALISIS preferiblemente el disco C del equipo. En caso de que no se pueda, se debe copiar en el disco D o  E o en la raíz de cualquier unidad disponible. La razón por la que se deben copiar estas herramientas en tal directorio, se debe a que las herramientas optimizadas tienen rutas relativas y automáticamente se redireccionan a la capeta **SCRIPTS_ANALISIS** localizada en la raíz de cualquier unidad de disco disponible. Esto es necesario si se van a emplear los modelos de geoprocesamiento suministrados en el repositorio de [modelos de geoprocesamiento](https://github.com/UpraAnalisis/Modelos-de-Geoprocesamiento).
 
-1. Se carga la variable y mensaje Advierte si quiere generar reporte. (Reporte es Opcional)
+Una vez se hayan descargado las herramientas y en caso de inconvenientes, se hayan 
 
-<p align="center">
- <img src="Images\GenerarReporte.png">
-</p>
+## Solución de problemas
 
-2. Si decide generar reporte seleccione donde lo desea guardar.
+Si no se tiene en cuenta el procedimiento de almacenar los scripts en la carpeta **SCRIPTS_ANALISIS** en el directorio raíz de una de las unidades de disco disponible, es probable que las herramientas no encuentren la ruta del script. ¿Cómo identificar este problema? El problema se presenta cuando al ejecutar la herramienta aparece el siguiente mensaje.
 
-<p align="center">
-<img src="img\savrep.PNG">
-</p>
+![desconexión](/Images/desconexion.png)
 
-3. De no generar reporte los datos quedan en un layer temporal llamado data y ahí los puede consultar.
+Otra forma de ver el inconveniente, es cuando se hace clic sobre la herramienta dentro de un modelo o dentro de un toolbox y la opción de editar desaparece.
 
-<p align="center">
-<img src="img\capcar.PNG">
-</p>
+![sin edición](/Images/desconexion2.png)
 
-4. El reporte aparece en Excel de la siguiente forma;  para el punto con coordenadas X,Y para la variable desempeño fiscal que para ese punto obtuvo una calificación de A2 por que presenta un valor de IC entre 0.4764 y 0.655, que será algo como lo siguiente:
+Para redireccionar la herramienta haga clic derecho sobre el script con problema de direccionamiento e ingrese en la opción propiedades.
 
- <p align="center">
- <img src="Images\Reporte.png">
-</p>
+![propiedades](/Images/desconexion3.png)
 
-5. Para realizar la consulta a múltiples variables a la vez solo es necesario ubicar estas en el TOC de ArcMap y luego seleccionar otra de la lista desplegable, esto produce un resultado que tiene las coordenadas del punto en cuestión, los nombres de las variables consultadas, sus aptitudes y los valores correspondientes.
+ Una vez allí, seleccione la pestaña Source en donde debe seleccionar el archivo de Python que lleva el nombre de la herramienta o la palabra **principal** dentro del nombre.
 
-<p align="center">
-<img src="Images\ReporteMultiple.png">
-</p>
+![ruta vacía](/Images/desconexion4.png)
+
+![nombre del script](/Images/desconexion5.png)
+
+ Contrario a esto, No se debe seleccionar el archivo de Python que tienen en su nombre las palabras Aux o Auxiliar.
+
+ Una vez terminado, se debe hacer clic en aceptar.
+
+![ruta vacía](/Images/desconexion6.png)
+
+Ahora si se hace clic derecho sobre la herramienta, es posible editar el script.
+
+![ruta vacía](/Images/desconexion7.png)
+
+Si los problemas persisten, por favor escribanos un correo a atencionalusuario@upra.gov.co
