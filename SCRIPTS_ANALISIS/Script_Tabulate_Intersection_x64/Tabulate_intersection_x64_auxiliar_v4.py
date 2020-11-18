@@ -7,7 +7,6 @@ reload(sys) # Reload does the trick!
 sys.setdefaultencoding('UTF8')
 try:
     t_inicio=time.clock()# captura el tiempo de inicio del proceso
-    #arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(3116)
     arcpy.env.overwriteOutput = True
 
 

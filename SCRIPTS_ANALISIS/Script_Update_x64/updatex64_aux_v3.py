@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 import arcpy,os,time
 t_inicio=time.clock()# captura el tiempo de inicio del proceso
-arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(3116)
+
 arcpy.env.overwriteOutput = True
 
 
 infea=arcpy.GetParameterAsText(0)
 feaUpdate= arcpy.GetParameterAsText(1)
 capa_salida=arcpy.GetParameterAsText(2)
-##gdb_salida=arcpy.GetParameterAsText(2)
-##output=""
-
 
 if __name__ == '__main__':
     print "Ejecutando update a 64bits ...."

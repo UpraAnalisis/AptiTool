@@ -14,7 +14,6 @@ import arcpy,os,subprocess,time,inspect
 #=========Variables Globales y de Entorno=====================#
 t_inicio=time.clock()# captura el tiempo de inicio del proceso
 
-arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(3116)
 arcpy.env.overwriteOutput = True
 
 infea=arcpy.GetParameterAsText(0)
@@ -62,7 +61,7 @@ if __name__ == '__main__':
     script=directorioyArchivo()
     script=script[1]+"\\"+scriptAuxiliar
     arcpy.AddMessage(infea)
-    comando=r"start %s %s %s %s %s %s"%(verPython,script,infea,join_atributtes,gaps,capa_salida)
+    comando=r'start %s %s "%s" "%s" "%s" "%s"'%(verPython,script,infea,join_atributtes,gaps,capa_salida)
     ff=subprocess.Popen(comando,stdin=None,stdout=subprocess.PIPE,shell=True,env=dict(os.environ, PYTHONHOME=verPythonDir))
     astdout, astderr = ff.communicate()
     arcpy.AddMessage("proceso Completado en %s Minutos." % ((time.clock() - t_inicio)/60))

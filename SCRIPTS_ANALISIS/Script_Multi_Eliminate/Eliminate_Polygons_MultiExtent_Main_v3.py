@@ -149,7 +149,7 @@ if __name__ == '__main__':
 
     for a in partes: # almacena los comandos en un arreglo+
 ##         comandos.append(r"start %s %s %s %s %s %s %s %s"%(verPython,script,fcEntrada,grilla,capa_exclusion,pasarlista(a),dirSalida,consulta))
-         comandos.append(r"start %s %s %s %s %s %s %s %s %s %s"%(verPython, script, fcEntrada , grilla , consulta, selection, FolderEntrada,
+         comandos.append(r'start %s %s "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s"'%(verPython, script, fcEntrada , grilla , consulta, selection, FolderEntrada,
           capa_exclusion , expresion_de_exclusion, pasarlista(a)))
 
     letras=string.ascii_letters # crea un listado de lestras que usará para almacenar la ejecución de los comandos

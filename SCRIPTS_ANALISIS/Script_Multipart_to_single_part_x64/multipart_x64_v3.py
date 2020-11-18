@@ -13,10 +13,7 @@ import arcpy,os,subprocess,time,inspect,sys
 
 #=========Variables Globales y de Entorno=====================#
 t_inicio=time.clock()# captura el tiempo de inicio del proceso
-arcpy.env.workspace = "in_memory"
-arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(3116)
 arcpy.env.overwriteOutput = True
-scriptAuxiliar="multipartx64_aux_z.py"
 
 infea=arcpy.GetParameterAsText(0)
 infea=arcpy.Describe(infea).catalogPath
@@ -56,7 +53,7 @@ if __name__ == '__main__':
     script=directorioyArchivo()
     script=script[1]+"\\"+scriptAuxiliar
     arcpy.AddMessage(script)
-    comando=r"start %s %s %s %s"%(verPython,script,infea,nombre_salida)
+    comando=r'start %s %s "%s" %s'%(verPython,script,infea,nombre_salida)
 
     ff=subprocess.Popen(comando,stdin=None,stdout=subprocess.PIPE,shell=True,env=dict(os.environ, PYTHONHOME=verPythonDir))
     astdout, astderr = ff.communicate()

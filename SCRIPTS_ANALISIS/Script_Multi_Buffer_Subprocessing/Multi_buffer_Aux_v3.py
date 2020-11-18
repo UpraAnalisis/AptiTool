@@ -8,8 +8,7 @@
 #
 # ---------------------------------------------------------------------
 #=====================Librerias==============================#
-import arcpy,random, time,os,subprocess, inspect,exceptions
-from multiprocessing import Process
+import arcpy,random, time,os, inspect,exceptions
 import string
 # ------------------------------------------------------------
 
@@ -30,17 +29,6 @@ try:
     line_end_type=arcpy.GetParameterAsText(6)
     dissolve_field=""
     rango=arcpy.GetParameterAsText(7)
-
-    ##infea=r"U:\SCRIPTS_ANALISIS\Script_Multibuffer_Multiprocessing\Datos_demo.gdb\Predios_demo"
-    ##feaGrilla=r"U:\SCRIPTS_ANALISIS\Script_Multibuffer_Multiprocessing\Datos_demo.gdb\Grilla_predios_demo"
-    ##radio= "100_Meters"
-    ##radio=radio.replace("_"," ")
-    ##dissolve_tipo="NONE"
-    ##ruta_raiz=r"U:\SCRIPTS_ANALISIS\Script_Multi_Buffer_Subprocessing\test\t1"
-    ##line_side="FULL"
-    ##line_end_type="ROUND"
-    ##dissolve_field=""
-    ##rango="[6_7_2]"
 
     #=====================funciones auxiliares=====================#
 

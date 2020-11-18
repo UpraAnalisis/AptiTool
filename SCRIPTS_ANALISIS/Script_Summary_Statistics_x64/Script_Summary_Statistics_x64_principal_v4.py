@@ -19,8 +19,6 @@ sys.setdefaultencoding('UTF8')
 
 #=========Variables Globales y de Entorno=====================#
 t_inicio=time.clock()# captura el tiempo de inicio del proceso
-#arcpy.env.workspace = "in_memory"
-#arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(3116)
 arcpy.env.overwriteOutput = True
 # ------------------------------------------------------------
 
@@ -28,6 +26,7 @@ arcpy.env.overwriteOutput = True
 #=========Parámetros=====================#
 
 in_table =r"%s"%(arcpy.GetParameterAsText(0))
+in_table=arcpy.Describe(in_table).catalogPath
 out_table =r"%s"%(arcpy.GetParameterAsText(1))
 statistics_fields =r"%s"%(arcpy.GetParameterAsText(2))
 case_field =r"%s"%(arcpy.GetParameterAsText(3))
@@ -148,7 +147,7 @@ else:
             case_field=cambia_caracteres(case_field)
             out_table=cambia_caracteres(out_table)
             ruta_txt_fids1=cambia_caracteres(ruta_txt_fids1)
-            comando=r"start %s %s %s %s %s %s %s %s %s"%(verPython,script,in_table,out_table, statistics_fields,case_field, tipo,ruta_txt_fids1,entorno)
+            comando=r'start %s "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s"'%(verPython,script,in_table,out_table, statistics_fields,case_field, tipo,ruta_txt_fids1,entorno)
 
         else:
             tipo= arcpy.Describe(in_table).dataType
@@ -156,7 +155,7 @@ else:
             statistics_fields=cambia_caracteres(statistics_fields)
             case_field=cambia_caracteres(case_field)
             out_table=cambia_caracteres(out_table)
-            comando=r"start %s %s %s %s %s %s %s %s"%(verPython,script,in_table,out_table, statistics_fields,case_field, tipo,entorno)
+            comando=r'start %s "%s" "%s" "%s" "%s" "%s" "%s" "%s"'%(verPython,script,in_table,out_table, statistics_fields,case_field, tipo,entorno)
 
         ff=subprocess.Popen(comando,stdin=None,stdout=subprocess.PIPE,shell=True,env=dict(os.environ, PYTHONHOME=verPythonDir))
         astdout, astderr = ff.communicate()

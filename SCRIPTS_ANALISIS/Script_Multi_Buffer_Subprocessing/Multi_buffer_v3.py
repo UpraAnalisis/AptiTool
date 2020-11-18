@@ -30,6 +30,7 @@ infea=arcpy.Describe(infea).catalogPath
 capa_salida=arcpy.GetParameterAsText(1)
 rutasalida=arcpy.GetParameterAsText(2)
 feaGrilla=arcpy.GetParameterAsText(3)
+feaGrilla=arcpy.Describe(feaGrilla).catalogPath
 
 radio= arcpy.GetParameterAsText(4)
 radio=radio.replace(" ","_")
@@ -134,7 +135,7 @@ if __name__ == '__main__':
         partes=partes1[:]
 
     for a in partes: # almacena los comandos en un arreglo
-         comandos.append(r"start %s %s %s %s %s %s %s %s %s %s %s"%(verPython,script,infea,feaGrilla,radio,disolve,rutasalida,line_side,line_end_type,dissolve_field,pasarlista(a)))
+         comandos.append(r'start %s %s "%s" "%s" %s %s %s %s %s %s %s'%(verPython,script,infea,feaGrilla,radio,disolve,rutasalida,line_side,line_end_type,dissolve_field,pasarlista(a)))
     for a in comandos:
         arcpy.AddMessage(a)
 
@@ -143,9 +144,9 @@ if __name__ == '__main__':
     instrucciones_espera=""
     for x in xrange(0,procesossimultaneos):
         if x==procesossimultaneos-1 :
-            instrucciones+='%s = subprocess.Popen(comandos[%s],stdin=None,stdout=subprocess.PIPE,shell=True,env=dict(os.environ, PYTHONHOME=verPythonDir))'%(letras[x],str(x))
+            instrucciones+='%s = subprocess.Popen(comandos[%s],stdin=None,stdout=subprocess.PIPE,shell=True)'%(letras[x],str(x))
         else:
-            instrucciones+='%s = subprocess.Popen(comandos[%s],stdin=None,stdout=subprocess.PIPE,shell=True,env=dict(os.environ, PYTHONHOME=verPythonDir));'%(letras[x],str(x))
+            instrucciones+='%s = subprocess.Popen(comandos[%s],stdin=None,stdout=subprocess.PIPE,shell=True);'%(letras[x],str(x))
     for x in xrange(0,procesossimultaneos):
         if x==procesossimultaneos-1 :
          instrucciones_espera+='astdout, astderr = %s.communicate()'%(letras[x])

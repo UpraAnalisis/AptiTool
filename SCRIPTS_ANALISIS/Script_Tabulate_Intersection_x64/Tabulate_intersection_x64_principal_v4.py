@@ -17,8 +17,6 @@ sys.setdefaultencoding('UTF8')
 
 #=========Variables Globales y de Entorno=====================#
 t_inicio=time.clock()# captura el tiempo de inicio del proceso
-#arcpy.env.workspace = "in_memory"
-#arcpy.env.outputCoordinateSystem = arcpy.SpatialReference(3116)
 arcpy.env.overwriteOutput = True
 
 
@@ -155,7 +153,7 @@ else:
         arcpy.AddMessage(entorno)
         arcpy.AddMessage("######### VARIABLES DE ENTORNO #########")
         arcpy.AddMessage(verPython)
-        comando=r"start %s %s %s %s %s %s %s %s %s %s %s %s %s"%(verPython,script,infea, zone_fields, in_class_features, out_table, class_fields, sum_fields, xy_tolerance, out_units,ruta_txt_fids1,ruta_txt_fids2,entorno)
+        comando=r'start %s "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s" "%s"'%(verPython,script,infea, zone_fields, in_class_features, out_table, class_fields, sum_fields, xy_tolerance, out_units,ruta_txt_fids1,ruta_txt_fids2,entorno)
         ff=subprocess.Popen(comando,stdin=None,stdout=subprocess.PIPE,shell=True,env=dict(os.environ, PYTHONHOME=verPythonDir))
         astdout, astderr = ff.communicate()
         arcpy.AddMessage("proceso Completado en %s Minutos." % ((time.clock() - t_inicio)/60))
