@@ -1,0 +1,1 @@
+C:\Python27\ArcGIS10.7\DLLs; C:\Python27\ArcGIS10.7\lib\lib-tk; C:\Python27\ArcGIS10.7; C:\Python27\ArcGIS10.7\lib\site-packages;C:\Windows\system32\python27.zip; C:\Python27\ArcGIS10.7\DLLs; C:\Program Files (x86)\ArcGIS\Desktop10.7\bin64; C:\Program Files (x86)\ArcGIS\Desktop10.7\ArcPy; C:\Program Files (x86)\ArcGIS\Desktop10.7\ArcToolBox\Scripts
